@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | Samira</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- ====== MENÚ DE NAVEGACIÓN ====== -->
+  <header>
+    <h1 class="logo">Samira</h1>
+    <nav>
+  <div class="menu-toggle" id="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </div>
+  <ul id="menu">
+    <li><a href="perfil.html">Perfil</a></li>
+    <li><a href="portafolio.html">Portafolio</a></li>
+    <li><a href="habilidades.html">Habilidades</a></li>
+    <li><a href="contacto.html" class="active">Contacto</a></li>
+    <li><a href="admin.html">Administrador</a></li>
+  </ul>
+</nav>
+
+  </header>
+
+  <!-- ====== SECCIÓN CONTACTO ====== -->
+  <section id="contacto">
+    <h2>Contáctame</h2>
+    <div class="contacto-container">
+      <!-- Información de contacto -->
+      <div class="info-contacto">
+        <p><i class="fas fa-envelope"></i> sollerriverasamira@gmail.com</p>
+        <p><i class="fas fa-phone"></i> +51 919 462 329</p>
+        <p><i class="fas fa-map-marker-alt"></i> Huancayo, Perú</p>
+        <div class="redes">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/SamiraSollerRivera"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/xami.rivera/"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Formulario de contacto -->
+      <form class="formulario-contacto" id="form-contacto">
+
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" name="correo" placeholder="Tu correo" required>
+        <textarea name="mensaje" placeholder="Tu mensaje" rows="5" required></textarea>
+        <button type="submit" class="btn">Enviar</button>
+        <p id="mensaje-confirmacion" style="display: none;" class="mensaje-exito">
+  ¡Mensaje enviado correctamente! 💌
+</p>
+
+      </form>
+    </div>
+  </section>
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu");
+
+  toggle.addEventListener("click", () => {
+    menu.classList.toggle("activo");
+  });
+</script>
+<script>
+  const form = document.getElementById("form-contacto");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nombre = form.nombre.value.trim();
+    const correo = form.correo.value.trim();
+    const mensaje = form.mensaje.value.trim();
+    const fecha = new Date().toLocaleString();
+
+    if (nombre && correo && mensaje) {
+      const nuevoMensaje = {
+        nombre,
+        correo,
+        mensaje,
+        fecha
+      };
+
+      const mensajesGuardados = JSON.parse(localStorage.getItem("mensajes")) || [];
+      mensajesGuardados.push(nuevoMensaje);
+      localStorage.setItem("mensajes", JSON.stringify(mensajesGuardados));
+
+      form.reset();
+const confirmacion = document.getElementById("mensaje-confirmacion");
+confirmacion.style.display = "block";
+confirmacion.style.opacity = "1";
+
+setTimeout(() => {
+  confirmacion.style.opacity = "0";
+  setTimeout(() => confirmacion.style.display = "none", 500);
+}, 4000);
+
+    }
+  });
+</script>
+
+</body>
+</html>

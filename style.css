@@ -1,0 +1,657 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0e0e0e;
+  color: #ffffff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background-color: #0e0e0e;
+}
+
+.logo {
+  color: #ff4f4f;
+  font-size: 1.8em;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #ff4f4f;
+}
+
+.inicio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 10%;
+  min-height: 100vh;
+  background-color: #0e0e0e;
+}
+
+.contenido {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.foto-perfil {
+  width: 300px;
+  border-radius: 50%;
+  border: 5px solid #ff4f4f;
+}
+
+.texto h2 {
+  font-size: 2.8em;
+  margin-bottom: 10px;
+}
+
+.texto h2 span {
+  color: #ff4f4f;
+}
+
+.texto h3 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.texto h3 span {
+  color: #ff4f4f;
+}
+
+.texto p {
+  max-width: 500px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.redes a {
+  color: #ff4f4f;
+  margin-right: 15px;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: transparent;
+  color: #ff4f4f;
+  border: 2px solid #ff4f4f;
+  text-decoration: none;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background-color: #ff4f4f;
+  color: #000;
+}
+
+
+/*habilidades*/
+
+#habilidades {
+  padding: 60px 10%;
+}
+
+#habilidades h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.skill {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(255, 79, 79, 0.2);
+}
+
+.skill h3 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.barra {
+  background-color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 25px;
+}
+
+.progreso {
+  background-color: #ff4f4f;
+  height: 100%;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+  line-height: 25px;
+}
+
+/*contacto*/
+
+#contacto {
+  padding: 50px 10%;
+  background-color: #fff;
+  text-align: center;
+}
+
+#contacto h2 {
+  font-size: 2em;
+  color: #4a4e69;
+  margin-bottom: 30px;
+}
+
+.contacto-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.info-contacto {
+  flex: 1 1 300px;
+  text-align: left;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.info-contacto p {
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-contacto i {
+  color: #4a4e69;
+}
+
+.redes {
+  margin-top: 20px;
+}
+
+.redes a {
+  color: #4a4e69;
+  margin-right: 15px;
+  font-size: 1.5em;
+  transition: color 0.3s ease;
+}
+
+.redes a:hover {
+  color: #9a8c98;
+}
+
+.formulario-contacto {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formulario-contacto input,
+.formulario-contacto textarea {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+.formulario-contacto textarea {
+  resize: none;
+}
+
+.formulario-contacto .btn {
+  background-color: #4a4e69;
+  color: white;
+  padding: 12px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.formulario-contacto .btn:hover {
+  background-color: #9a8c98;
+}
+
+
+
+ /*admin*/
+
+ /* ====== ESTILO PARA ADMINISTRADOR ====== */
+#admin {
+  background-color: #111; /* Fondo negro */
+  padding: 50px 20px;
+  min-height: 100vh;
+  text-align: center;
+  color: white;
+}
+
+
+#admin h2 {
+  font-size: 2em;
+  color: #ff4f4f;
+  margin-bottom: 30px;
+}
+
+.admin-container {
+  max-width: 400px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.login-form h3 {
+  color: #4a4e69;
+  font-size: 1.6em;
+  margin-bottom: 20px;
+}
+
+.login-form input {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1em;
+}
+
+.login-form .btn {
+  background-color: #4a4e69;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  font-size: 1.1em;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-form .btn:hover {
+  background-color: #6c6f89;
+}
+
+.nota {
+  margin-top: 15px;
+  color: #777;
+  font-size: 0.9em;
+}
+
+.registro-estudiante {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 1em;
+  color: #333;
+}
+
+.registro-estudiante a {
+  color: #ff4f4f;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 8px;
+  transition: color 0.3s ease;
+}
+
+.registro-estudiante a:hover {
+  color: #e60000;
+  text-decoration: underline;
+}
+
+
+.subir-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 10%;
+  min-height: 100vh;
+  background-color: #121212;
+}
+
+.formulario-subida {
+  background-color: #1f1f1f;
+  padding: 40px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 0 15px rgba(255, 79, 79, 0.1);
+}
+
+.formulario-subida label {
+  display: block;
+  margin-bottom: 8px;
+  color: #ff4f4f;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.formulario-subida input[type="text"],
+.formulario-subida input[type="file"],
+.formulario-subida textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  background-color: #2b2b2b;
+  color: #fff;
+  font-size: 1em;
+}
+
+.formulario-subida textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.btn-subir {
+  background-color: #ff4f4f;
+  color: #000;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  font-size: 1.1em;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-subir:hover {
+  background-color: #ff3333;
+  box-shadow: 0 0 10px #ff4f4faa;
+}
+
+.mensaje-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px;
+}
+
+.mensaje-card {
+  background-color: #1f1f1f;
+  border: 1px solid #ff4f4f55;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(255, 79, 79, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.mensaje-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(255, 79, 79, 0.3);
+}
+
+.mensaje-card h3 {
+  color: #ff4f4f;
+  margin-bottom: 10px;
+}
+
+.mensaje-card p {
+  color: #ddd;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.fecha-mensaje {
+  display: block;
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 0.9em;
+}
+
+
+.mensaje-exito {
+  margin-top: 15px;
+  color: #4caf50;
+  font-size: 1.1em;
+  background-color: #1e1e1e;
+  padding: 10px 15px;
+  border: 1px solid #4caf50;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+  transition: opacity 0.5s ease;
+}
+ .alerta {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.alerta.mostrar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.alerta-exito {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.alerta-error {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.alerta-oculta {
+  display: none;
+}
+
+/*portafolio*/
+
+body.fondo-oscuro {
+  background-color: #121212;
+  color: #eee;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#portafolio h2 {
+  text-align: center;
+  color: #ffddcc;
+  margin-top: 30px;
+  font-size: 2.2em;
+}
+
+.proyectos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  padding: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.proyecto {
+  background: #1f1f1f;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.proyecto:hover {
+  transform: translateY(-5px);
+}
+
+.icono-pdf {
+  font-size: 4em;
+  color: #f44336;
+  margin-bottom: 15px;
+}
+
+.proyecto h3 {
+  color: #fff8dc;
+  margin-bottom: 15px;
+}
+
+.proyecto a {
+  display: inline-block;
+  margin: 8px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-ver {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-descargar {
+  background: #2196f3;
+  color: white;
+}
+
+.btn-ver:hover {
+  background: #66bb6a;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #4caf50aa;
+}
+
+.btn-descargar:hover {
+  background: #42a5f5;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #2196f3aa;
+}
+ 
+.btn-editar {
+  background: #ffa000;
+  color: white;
+}
+
+.btn-editar:hover {
+  background: #ffb74d;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #ffa000aa;
+}
+
+
+
+/* Menú responsive */
+.menu-toggle {
+  display: none;
+  font-size: 1.8em;
+  color: #ff4f4f;
+  cursor: pointer;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+    display: none;
+  }
+
+  nav ul.activo {
+    display: flex;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+
+  .contenido {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .foto-perfil {
+    width: 200px;
+  }
+
+  .texto h2 {
+    font-size: 2.2em;
+  }
+
+  .texto h3 {
+    font-size: 1.5em;
+  }
+
+  .texto p {
+    font-size: 0.95em;
+  }
+
+  .skills-container,
+  .proyectos,
+  .contacto-container {
+    grid-template-columns: 1fr !important;
+    flex-direction: column;
+  }
+
+  .admin-container {
+    width: 90%;
+  }
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mensajes</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Librería de alertas bonitas -->
+</head>
+<body class="fondo-oscuro">
+  <header>
+    <h1>💬 Mensajes</h1>
+    <nav>
+      <a href="panel.html" class="btn">← Volver al Panel</a>
+    </nav>
+  </header>
+
+  <main style="padding: 40px 10%; text-align: center;">
+    <p style="margin-bottom: 30px; font-size: 1.2em; color: #ccc;">
+      Aquí puedes revisar los mensajes recibidos.
+    </p>
+
+    <section class="mensaje-container" id="contenedor-mensajes">
+      <!-- Los mensajes aparecerán aquí -->
+    </section>
+  </main>
+
+  <script>
+    const contenedor = document.getElementById("contenedor-mensajes");
+    let mensajes = JSON.parse(localStorage.getItem("mensajes")) || [];
+
+    function mostrarMensajes() {
+      contenedor.innerHTML = "";
+
+      if (mensajes.length === 0) {
+        contenedor.innerHTML = "<p style='color:#ccc;'>No hay mensajes aún.</p>";
+        return;
+      }
+
+      mensajes.slice().reverse().forEach((msg, index) => {
+        const tarjeta = document.createElement("div");
+        tarjeta.classList.add("mensaje-card");
+        tarjeta.innerHTML = `
+          <h3>📩 De: ${msg.nombre}</h3>
+          <p><strong>Correo:</strong> ${msg.correo}</p>
+          <p><strong>Mensaje:</strong> ${msg.mensaje}</p>
+          <span class="fecha-mensaje">🕒 ${msg.fecha}</span>
+          <br>
+          <button class="btn-eliminar" onclick="eliminarMensaje(${mensajes.length - 1 - index})">🗑 Eliminar</button>
+        `;
+        contenedor.appendChild(tarjeta);
+      });
+    }
+
+    function eliminarMensaje(index) {
+      Swal.fire({
+        title: '¿Eliminar mensaje?',
+        text: "Esta acción no se puede deshacer",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          mensajes.splice(index, 1);
+          localStorage.setItem("mensajes", JSON.stringify(mensajes));
+          mostrarMensajes();
+          Swal.fire('¡Eliminado!', 'El mensaje ha sido eliminado.', 'success');
+        }
+      });
+    }
+
+    mostrarMensajes();
+  </script>
+
+  <style>
+    .mensaje-card {
+      background: #1e1e1e;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      color: #fff;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+
+    .fecha-mensaje {
+      display: block;
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+
+    .btn-eliminar {
+      margin-top: 10px;
+      background-color: #d33;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-eliminar:hover {
+      background-color: #b22;
+    }
+  </style>
+</body>
+</html>

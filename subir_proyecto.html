@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Subir Proyecto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="fondo-oscuro">
+  <header>
+    <h1 class="logo">⬆️ Subir Proyecto</h1>
+    <nav>
+      <ul>
+        <li><a href="panel.html">← Volver al Panel</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="subir-container">
+    <form id="form-proyecto" class="formulario-subida">
+      <label for="titulo">Título del Proyecto:</label>
+      <input type="text" id="titulo" name="titulo" required>
+
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" name="descripcion" required></textarea>
+
+      <label for="archivo">Enlace de archivo (Drive):</label>
+      <input type="url" id="archivo" name="archivo" placeholder="https://drive.google.com/..." required>
+
+      <button type="submit" class="btn-subir">Subir Proyecto</button>
+    </form>
+  </section>
+
+  <!-- Contenedor para la alerta personalizada -->
+<div id="alerta" class="alerta-oculta"></div>
+
+<script>
+  function mostrarAlerta(mensaje, tipo = "exito") {
+    const alerta = document.getElementById("alerta");
+    alerta.textContent = mensaje;
+    alerta.className = `alerta alerta-${tipo}`;
+
+    // Mostrar alerta
+    setTimeout(() => {
+      alerta.classList.add("mostrar");
+    }, 100);
+
+    // Ocultar después de 3 segundos
+    setTimeout(() => {
+      alerta.classList.remove("mostrar");
+    }, 3000);
+  }
+
+  document.getElementById("form-proyecto").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const titulo = document.getElementById("titulo").value.trim();
+    const descripcion = document.getElementById("descripcion").value.trim();
+    const archivo = document.getElementById("archivo").value.trim();
+
+    if (!titulo || !descripcion || !archivo) {
+      mostrarAlerta("⚠️ Por favor completa todos los campos.", "error");
+      return;
+    }
+
+    const proyecto = { titulo, descripcion, archivo };
+    const proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
+    proyectos.push(proyecto);
+    localStorage.setItem("proyectos", JSON.stringify(proyectos));
+
+    mostrarAlerta("✅ Proyecto subido correctamente.", "exito");
+    document.getElementById("form-proyecto").reset();
+  });
+</script>
+
+</body>
+</html>

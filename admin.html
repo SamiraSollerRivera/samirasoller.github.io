@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Administrador | Samira</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .login-form input:focus,
+    .login-form select:focus {
+      outline: none;
+      border: 2px solid #6c5ce7;
+      box-shadow: 0 0 8px rgba(108, 92, 231, 0.6);
+      transition: 0.3s;
+    }
+
+    .login-form select {
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .login-form select:hover {
+      transform: scale(1.03);
+      border-color: #6c5ce7;
+    }
+
+    #mensaje-login {
+      font-size: 1.1em;
+      transition: all 0.5s ease;
+    }
+
+    .shake {
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-10px); }
+      40%, 80% { transform: translateX(10px); }
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8em;
+      color: #ff4f4f;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      .menu-toggle {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+      }
+
+      nav ul.activo {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
+
+      .admin-container {
+        padding: 0 20px;
+      }
+
+      .login-form input,
+      .login-form select {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="logo">Samira</h1>
+    <nav>
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul id="menu">
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="portafolio.html">Portafolio</a></li>
+        <li><a href="habilidades.html">Habilidades</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="admin.html" class="active">Administrador</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="admin">
+    <h2>Zona de Administrador</h2>
+    <div class="admin-container fade-in">
+      <form class="login-form" id="formulario-login">
+        <h3>Iniciar Sesión</h3>
+        <input type="text" id="usuario" placeholder="Usuario" required>
+        <input type="password" id="contrasena" placeholder="Contraseña" required>
+
+        <select id="rol" required>
+          <option value="" disabled selected>Selecciona tu rol</option>
+          <option value="admin">Administrador</option>
+          <option value="profesor">Profesor</option>
+          <option value="estudiante">Estudiante</option>
+        </select>
+
+        <button type="submit" class="btn">Ingresar</button>
+      </form>
+
+      <p class="nota">Solo personal autorizado puede acceder a esta sección.</p>
+      <p id="mensaje-login" style="text-align:center; margin-top:10px;"></p>
+    </div>
+  </section>
+
+  <script>
+    // Menú responsive
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("menu");
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("activo");
+    });
+
+    // Mostrar animación
+    window.addEventListener("DOMContentLoaded", () => {
+      document.querySelector(".admin-container").classList.add("fade-in");
+
+      // Crear admin, profesor y estudiante por defecto
+      if (!localStorage.getItem("usuarios")) {
+        const usuariosIniciales = [
+          { usuario: "admin", contrasena: "1234", rol: "admin" },
+          { usuario: "profesor", contrasena: "abcd", rol: "profesor" },
+          { usuario: "estudiante", contrasena: "est1", rol: "estudiante" }
+        ];
+        localStorage.setItem("usuarios", JSON.stringify(usuariosIniciales));
+      }
+
+      const savedRol = localStorage.getItem("rolSeleccionado");
+      if (savedRol) {
+        document.getElementById("rol").value = savedRol;
+      }
+    });
+
+    // Validar login desde localStorage
+    document.getElementById("formulario-login").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const usuario = document.getElementById("usuario").value.trim();
+      const contrasena = document.getElementById("contrasena").value.trim();
+      const rol = document.getElementById("rol").value;
+      const mensaje = document.getElementById("mensaje-login");
+      const form = document.querySelector(".login-form");
+
+      if (!rol) {
+        mensaje.style.color = "red";
+        mensaje.textContent = "⚠️ Por favor, selecciona un rol.";
+        form.classList.add("shake");
+        setTimeout(() => form.classList.remove("shake"), 500);
+        return;
+      }
+
+      localStorage.setItem("rolSeleccionado", rol);
+
+      const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      const usuarioEncontrado = usuariosGuardados.find(u =>
+        u.usuario === usuario && u.contrasena === contrasena && u.rol === rol
+      );
+
+      if (usuarioEncontrado) {
+        mensaje.style.color = "green";
+        mensaje.textContent = "✅ Acceso concedido. Redirigiendo...";
+        setTimeout(() => {
+          window.location.href = "panel.html";
+        }, 1000);
+      } else {
+        mensaje.style.color = "red";
+        mensaje.textContent = "❌ Usuario, contraseña o rol incorrectos.";
+        form.classList.add("shake");
+        setTimeout(() => form.classList.remove("shake"), 500);
+      }
+    });
+  </script>
+
+</body>
+</html>

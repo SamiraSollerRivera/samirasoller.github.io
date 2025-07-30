@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyectos Subidos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="fondo-oscuro">
+  <header>
+    <div class="logo">📁 Proyectos</div>
+    <nav>
+      <ul>
+        <li><a href="panel.html">← Volver al Panel</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="portafolio">
+    <h2>Mis Proyectos Subidos</h2>
+    <div class="proyectos" id="lista-proyectos">
+      <!-- Aquí se insertan los proyectos dinámicamente -->
+    </div>
+  </section>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const lista = document.getElementById("lista-proyectos");
+    let proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
+
+    if (proyectos.length === 0) {
+      lista.innerHTML = "<p style='grid-column: 1/-1; text-align: center;'>No hay proyectos subidos aún.</p>";
+      return;
+    }
+
+    // Función para volver a renderizar los proyectos
+    function renderProyectos() {
+      lista.innerHTML = "";
+      proyectos.forEach((proy, index) => {
+        const div = document.createElement("div");
+        div.className = "proyecto";
+        div.innerHTML = `
+          <div class="icono-pdf"><i class="fas fa-file-pdf"></i></div>
+          <h3>${proy.titulo}</h3>
+          <p>${proy.descripcion}</p>
+          <a class="btn-ver" href="${proy.archivo}" target="_blank">📎 Ver archivo</a><br><br>
+          <a href="#" class="btn-editar" data-index="${index}">📝 Editar</a>
+          <a href="#" class="btn-descargar btn-eliminar" data-index="${index}">🗑️ Eliminar</a>
+        `;
+        lista.appendChild(div);
+      });
+
+      // Eventos para editar
+      document.querySelectorAll(".btn-editar").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const index = e.target.dataset.index;
+          const nuevoTitulo = prompt("Nuevo título:", proyectos[index].titulo);
+          const nuevaDescripcion = prompt("Nueva descripción:", proyectos[index].descripcion);
+
+          if (nuevoTitulo && nuevaDescripcion) {
+            proyectos[index].titulo = nuevoTitulo;
+            proyectos[index].descripcion = nuevaDescripcion;
+            localStorage.setItem("proyectos", JSON.stringify(proyectos));
+            renderProyectos(); // volver a mostrar actualizados
+          }
+        });
+      });
+
+      // Eventos para eliminar
+      document.querySelectorAll(".btn-eliminar").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const index = e.target.dataset.index;
+          const confirmar = confirm("¿Estás segura de eliminar este proyecto?");
+          if (confirmar) {
+            proyectos.splice(index, 1); // eliminar
+            localStorage.setItem("proyectos", JSON.stringify(proyectos));
+            renderProyectos(); // volver a mostrar
+          }
+        });
+      });
+    }
+
+    renderProyectos(); // mostrar al cargar
+  });
+</script>
+
+
+  <!-- Asegúrate de tener Font Awesome para el ícono PDF -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

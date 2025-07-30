@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro Estudiante | Samira</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER (opcional si quieres mantener el menú) -->
+  <header>
+    <h1 class="logo">Samira</h1>
+    <nav>
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul id="menu">
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="portafolio.html">Portafolio</a></li>
+        <li><a href="habilidades.html">Habilidades</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="admin.html">Administrador</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="admin">
+    <h2>Registro de Estudiantes</h2>
+    <div class="admin-container">
+      <!-- ...Todo igual arriba hasta tu formulario... -->
+
+<form class="login-form" id="registro-form">
+  <h3>Crear cuenta como estudiante</h3>
+  <input type="text" id="usuario" placeholder="Nombre de usuario" required>
+  <input type="password" id="contrasena" placeholder="Contraseña" required>
+  <button type="submit" class="btn">Registrarse</button>
+</form>
+
+<p id="mensaje-registro" style="text-align:center; margin-top:10px;"></p>
+<p class="nota">Luego podrás iniciar sesión desde el área de administrador.</p>
+
+<!-- Botón para volver al login -->
+<div style="text-align:center; margin-top:20px;">
+  <a href="admin.html" class="btn" style="text-decoration:none; padding:10px 20px; background:#4a4e69; color:white; border-radius:5px;">⬅ Volver al Login</a>
+</div>
+
+<!-- ... y sigue el script -->
+<script>
+  // Menú responsive
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("menu");
+  toggle.addEventListener("click", () => {
+    menu.classList.toggle("activo");
+  });
+
+  // Registro
+  document.getElementById("registro-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const usuario = document.getElementById("usuario").value.trim();
+    const contrasena = document.getElementById("contrasena").value.trim();
+    const mensaje = document.getElementById("mensaje-registro");
+
+    fetch("registro_estudiante.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `usuario=${encodeURIComponent(usuario)}&contrasena=${encodeURIComponent(contrasena)}`
+    })
+    .then(res => res.text())
+    .then(data => {
+      if (data.trim() === "exito") {
+        mensaje.style.color = "green";
+        mensaje.textContent = "✅ Registro exitoso. Redirigiendo al login...";
+        // Espera 2 segundos y luego redirige
+        setTimeout(() => {
+          window.location.href = "admin.html";
+        }, 2000);
+      } else {
+        mensaje.style.color = "red";
+        mensaje.textContent = "❌ " + data;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
